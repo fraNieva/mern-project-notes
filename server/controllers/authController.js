@@ -6,6 +6,14 @@ const asyncHandler = require('express-async-handler');
 // @desc Login
 // @route POST /auth
 // @access Public
+/**
+ * Logs in a user by validating the username and password, and returns an access token.
+ *
+ * @param {object} req - The request object.
+ * @param {object} res - The response object.
+ * @returns {object} - The access token and sets a secure cookie with the refresh token.
+ * @throws {object} - Unauthorized or Bad Request error messages.
+ */
 const login = asyncHandler(async (req, res) => {
 	const { username, password } = req.body;
 
@@ -55,6 +63,14 @@ const login = asyncHandler(async (req, res) => {
 // @desc Refresh
 // @route GET /auth/refresh
 // @access Public - because access token has expired
+/**
+ * Refreshes the access token for an authenticated user.
+ *
+ * @param {object} req - The request object.
+ * @param {object} res - The response object.
+ * @returns {object} - The new access token.
+ * @throws {object} - Unauthorized or Forbidden error messages.
+ */
 const refresh = (req, res) => {
 	const cookies = req.cookies;
 
@@ -91,6 +107,13 @@ const refresh = (req, res) => {
 // @desc Logout
 // @route POST /auth/logout
 // @access Public - just to clear cookie if exists
+/**
+ * Logs out the user by clearing the JWT cookie.
+ *
+ * @param {object} req - The request object.
+ * @param {object} res - The response object.
+ * @returns {object} - A JSON response indicating success.
+ */
 const logout = (req, res) => {
 	const cookies = req.cookies;
 	if (!cookies?.jwt) return res.sendStatus(204); //No content
