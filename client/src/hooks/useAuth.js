@@ -11,7 +11,7 @@ import jwtDecode from 'jwt-decode';
  * - isManager: A boolean indicating if the user is a manager.
  * - status: A string representing the status of the user (Employee, Manager, or Admin).
  *
- * @returns {Object} The authentication information object.
+ * @returns {Object} The authentication information object { username, roles, isAdmin, isManager, status }
  */
 const useAuth = () => {
 	const token = useSelector(selectCurrentToken);
